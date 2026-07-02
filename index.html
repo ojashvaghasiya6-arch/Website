@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Octoplus — Fine Jewelry</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400;1,6..96,500&family=Jost:wght@300;400;500&display=swap');
+
+:root{
+  --ivory:#FBF9F5;
+  --paper:#FFFFFF;
+  --ink:#14181A;
+  --fog:#6B7574;
+  --lagoon:#0F8F87;
+  --lagoon-deep:#0A6E68;
+  --mist:#E3F0EE;
+  --brass:#B08D57;
+  --line:rgba(20,24,26,.12);
+  --line-soft:rgba(20,24,26,.07);
+  --shadow:0 24px 60px -30px rgba(20,24,26,.28);
+  --serif:'Bodoni Moda', Georgia, 'Times New Roman', serif;
+  --sans:'Jost', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --wide:.22em;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);
+  color:var(--ink);
+  background:var(--ivory);
+  font-weight:300;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+
+.eyebrow{
+  font-size:.7rem;
+  letter-spacing:var(--wide);
+  text-transform:uppercase;
+  color:var(--lagoon-deep);
+  font-weight:500;
+}
+.wrap{max-width:1240px;margin:0 auto;padding:0 40px}
+
+/* ---------- Announcement ---------- */
+.announce{
+  background:var(--ink);
+  color:var(--ivory);
+  text-align:center;
+  font-size:.66rem;
+  letter-spacing:var(--wide);
+  text-transform:uppercase;
+  padding:11px 16px;
+  font-weight:400;
+}
+.announce span{opacity:.85}
+
+/* ---------- Header ---------- */
+.site-header{
+  position:sticky;top:0;z-index:60;
+  background:rgba(251,249,245,.86);
+  backdrop-filter:saturate(160%) blur(14px);
+  border-bottom:1px solid var(--line-soft);
+}
+.header-inner{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  gap:24px;
+  padding:20px 40px;
+}
+.nav-primary{display:flex;gap:30px;justify-self:start}
+.nav-primary a{
+  font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink);font-weight:400;position:relative;padding:6px 0;
+  transition:color .25s;
+}
+.nav-primary a::after{
+  content:"";position:absolute;left:0;bottom:0;height:1px;width:0;
+  background:var(--lagoon-deep);transition:width .3s ease;
+}
+.nav-primary a:hover{color:var(--lagoon-deep)}
+.nav-primary a:hover::after{width:100%}
+
+.brand{justify-self:center;display:flex;align-items:center;gap:14px}
+.brand .signet{width:26px;height:26px;flex:none}
+.wordmark{
+  font-family:var(--serif);
+  font-weight:500;
+  font-size:1.6rem;
+  letter-spacing:.34em;
+  text-transform:uppercase;
+  padding-left:.34em;
+  line-height:1;
+}
+.header-actions{display:flex;gap:8px;justify-self:end;align-items:center}
+.icon-btn{
+  width:42px;height:42px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .25s,color .25s;position:relative;color:var(--ink);
+}
+.icon-btn:hover{background:var(--mist);color:var(--lagoon-deep)}
+.icon-btn svg{width:19px;height:19px}
+.cart-count{
+  position:absolute;top:4px;right:3px;
+  background:var(--lagoon);color:#fff;
+  font-family:var(--sans);font-size:.58rem;font-weight:500;
+  min-width:17px;height:17px;border-radius:9px;
+  display:flex;align-items:center;justify-content:center;padding:0 4px;
+  transform:scale(0);transition:transform .3s cubic-bezier(.5,1.6,.5,1);
+}
+.cart-count.show{transform:scale(1)}
+
+.menu-toggle{display:none}
+
+/* ---------- Hero ---------- */
+.hero{
+  position:relative;
+  text-align:center;
+  padding:118px 40px 128px;
+  overflow:hidden;
+}
+.hero-watermark{
+  position:absolute;top:50%;left:50%;
+  width:min(760px,92vw);
+  transform:translate(-50%,-52%);
+  opacity:.05;pointer-events:none;color:var(--ink);
+}
+.hero-inner{position:relative;max-width:760px;margin:0 auto}
+.hero .eyebrow{
+  display:inline-block;margin-bottom:30px;
+  opacity:0;animation:rise .9s .1s forwards;
+}
+.hero h1{
+  font-family:var(--serif);
+  font-weight:400;
+  font-size:clamp(2.9rem,6.6vw,5.4rem);
+  line-height:1.02;
+  letter-spacing:-.01em;
+  margin-bottom:26px;
+}
+.hero h1 em{font-style:italic;color:var(--lagoon-deep)}
+.hero .lede{
+  font-size:1.06rem;color:var(--fog);font-weight:300;
+  max-width:480px;margin:0 auto 40px;
+}
+.hero h1,.hero .lede,.hero-cta{opacity:0;animation:rise .9s forwards}
+.hero h1{animation-delay:.22s}
+.hero .lede{animation-delay:.36s}
+.hero-cta{animation-delay:.5s;display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+
+.btn{
+  font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;font-weight:400;
+  padding:16px 34px;border:1px solid var(--ink);
+  transition:all .3s ease;display:inline-flex;align-items:center;gap:10px;
+}
+.btn-solid{background:var(--ink);color:var(--ivory)}
+.btn-solid:hover{background:var(--lagoon-deep);border-color:var(--lagoon-deep)}
+.btn-ghost:hover{background:var(--ink);color:var(--ivory)}
+
+@keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+
+/* ---------- Marquee strip ---------- */
+.strip{
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  background:var(--paper);
+}
+.strip-inner{
+  display:flex;justify-content:center;gap:64px;flex-wrap:wrap;
+  padding:26px 40px;
+}
+.strip-item{
+  display:flex;align-items:center;gap:11px;
+  font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--fog);
+}
+.strip-item svg{width:17px;height:17px;color:var(--lagoon-deep);flex:none}
+
+/* ---------- Section head ---------- */
+.section{padding:104px 0}
+.section-head{text-align:center;max-width:620px;margin:0 auto 62px}
+.section-head .eyebrow{display:block;margin-bottom:18px}
+.section-head h2{
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(2rem,4vw,3rem);line-height:1.08;letter-spacing:-.01em;
+}
+.section-head p{color:var(--fog);margin-top:16px;font-size:1rem}
+
+/* ---------- Categories ---------- */
+.cats{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.cat{
+  position:relative;border:1px solid var(--line);background:var(--paper);
+  padding:46px 34px 40px;text-align:center;overflow:hidden;
+  transition:border-color .35s,transform .35s;
+}
+.cat:hover{border-color:var(--lagoon);transform:translateY(-4px)}
+.cat-art{height:150px;display:flex;align-items:center;justify-content:center;margin-bottom:26px}
+.cat-art svg{height:118px;width:auto;color:var(--ink)}
+.cat h3{font-family:var(--serif);font-weight:500;font-size:1.35rem;letter-spacing:.02em;margin-bottom:8px}
+.cat .link{
+  font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--lagoon-deep);
+  display:inline-flex;align-items:center;gap:7px;margin-top:6px;
+}
+.cat .link svg{width:15px;transition:transform .3s}
+.cat:hover .link svg{transform:translateX(5px)}
+
+/* ---------- Products ---------- */
+.products{background:var(--paper)}
+.product-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:20px;
+}
+.product-card{
+  background:var(--ivory);border:1px solid var(--line-soft);
+  display:flex;flex-direction:column;transition:border-color .3s,box-shadow .35s;
+}
+.product-card:hover{border-color:var(--line);box-shadow:var(--shadow)}
+.pc-media{
+  position:relative;aspect-ratio:1/1;
+  display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(120% 120% at 50% 22%, var(--mist) 0%, var(--ivory) 72%);
+  overflow:hidden;
+}
+.pc-media svg.jewel{width:60%;height:60%;color:var(--ink);transition:transform .55s cubic-bezier(.2,.7,.2,1)}
+.product-card:hover .pc-media svg.jewel{transform:scale(1.07) rotate(-1deg)}
+.pc-frame{position:absolute;inset:18px;color:var(--brass);opacity:.4;pointer-events:none}
+.pc-body{padding:22px 22px 24px;display:flex;flex-direction:column;gap:6px;flex:1}
+.pc-cat{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--fog)}
+.pc-name{font-family:var(--serif);font-size:1.14rem;font-weight:500;letter-spacing:.01em}
+.pc-metal{font-size:.78rem;color:var(--fog)}
+.pc-foot{display:flex;align-items:center;justify-content:space-between;margin-top:14px}
+.pc-price{font-family:var(--serif);font-size:1.05rem;font-weight:500}
+.pc-add{
+  font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;
+  border:1px solid var(--ink);padding:10px 15px;transition:all .28s;white-space:nowrap;
+}
+.pc-add:hover{background:var(--ink);color:var(--ivory)}
+.pc-add:disabled{opacity:.55;cursor:default;background:var(--ink);color:var(--ivory)}
+
+/* ---------- Story ---------- */
+.story{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:0}
+.story-art{
+  background:linear-gradient(150deg,var(--lagoon-deep),var(--lagoon) 60%,#12A79E);
+  min-height:520px;display:flex;align-items:center;justify-content:center;padding:40px;
+  position:relative;overflow:hidden;
+}
+.story-art .halo{width:min(360px,70%);color:rgba(255,255,255,.92)}
+.story-art::after{
+  content:"";position:absolute;inset:20px;border:1px solid rgba(255,255,255,.28);
+  pointer-events:none;
+}
+.story-copy{padding:0 clamp(30px,6vw,86px)}
+.story-copy .eyebrow{display:block;margin-bottom:20px}
+.story-copy h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.9rem,3.4vw,2.7rem);line-height:1.12;margin-bottom:22px}
+.story-copy p{color:var(--fog);margin-bottom:18px;font-size:1.02rem}
+.story-copy .btn{margin-top:14px}
+
+/* ---------- Newsletter ---------- */
+.news{background:var(--ink);color:var(--ivory);text-align:center;padding:96px 40px}
+.news .signet{width:34px;height:34px;margin:0 auto 26px;color:var(--mist)}
+.news h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.9rem,3.6vw,2.8rem);margin-bottom:16px}
+.news p{color:rgba(251,249,245,.66);max-width:440px;margin:0 auto 36px;font-size:1rem}
+.news-form{display:flex;max-width:460px;margin:0 auto;gap:0;border-bottom:1px solid rgba(251,249,245,.4)}
+.news-form input{
+  flex:1;background:none;border:none;color:var(--ivory);
+  font-family:var(--sans);font-weight:300;font-size:.95rem;padding:14px 6px;letter-spacing:.02em;
+}
+.news-form input::placeholder{color:rgba(251,249,245,.45)}
+.news-form input:focus{outline:none}
+.news-form button{
+  font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ivory);
+  padding:14px 6px 14px 22px;transition:color .25s;white-space:nowrap;
+}
+.news-form button:hover{color:var(--mist)}
+.news-note{margin-top:16px;font-size:.72rem;letter-spacing:.04em;color:rgba(251,249,245,.5);min-height:1em}
+
+/* ---------- Footer ---------- */
+.site-footer{background:var(--ivory);padding:78px 40px 40px;border-top:1px solid var(--line)}
+.foot-grid{
+  max-width:1240px;margin:0 auto;
+  display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:44px;
+}
+.foot-brand .brand{justify-content:flex-start;margin-bottom:18px}
+.foot-brand p{color:var(--fog);font-size:.9rem;max-width:300px}
+.foot-col h4{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:18px;color:var(--ink);font-weight:500}
+.foot-col a{display:block;color:var(--fog);font-size:.88rem;padding:6px 0;transition:color .22s}
+.foot-col a:hover{color:var(--lagoon-deep)}
+.foot-base{
+  max-width:1240px;margin:56px auto 0;padding-top:26px;border-top:1px solid var(--line-soft);
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  font-size:.72rem;letter-spacing:.04em;color:var(--fog);
+}
+
+/* ---------- Cart drawer ---------- */
+.overlay{
+  position:fixed;inset:0;background:rgba(20,24,26,.42);
+  opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s;z-index:90;
+  backdrop-filter:blur(2px);
+}
+.overlay.open{opacity:1;visibility:visible}
+.cart{
+  position:fixed;top:0;right:0;height:100%;width:420px;max-width:92vw;
+  background:var(--ivory);z-index:100;display:flex;flex-direction:column;
+  transform:translateX(100%);transition:transform .42s cubic-bezier(.4,0,.1,1);
+  box-shadow:-30px 0 60px -40px rgba(20,24,26,.4);
+}
+.cart.open{transform:translateX(0)}
+.cart-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:26px 28px;border-bottom:1px solid var(--line);
+}
+.cart-head h3{font-family:var(--serif);font-weight:500;font-size:1.3rem;letter-spacing:.06em;text-transform:uppercase}
+.cart-head .close{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background .25s}
+.cart-head .close:hover{background:var(--mist)}
+.cart-head .close svg{width:18px}
+.cart-items{flex:1;overflow-y:auto;padding:8px 28px}
+.cart-empty{
+  height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;color:var(--fog);gap:18px;padding:40px;
+}
+.cart-empty svg{width:46px;color:var(--line);opacity:.9}
+.cart-empty p{font-size:.92rem}
+.ci{display:flex;gap:16px;padding:22px 0;border-bottom:1px solid var(--line-soft)}
+.ci-media{
+  width:74px;height:74px;flex:none;border:1px solid var(--line-soft);
+  background:radial-gradient(120% 120% at 50% 25%,var(--mist),var(--ivory));
+  display:flex;align-items:center;justify-content:center;
+}
+.ci-media svg{width:62%;height:62%;color:var(--ink)}
+.ci-info{flex:1;min-width:0}
+.ci-name{font-family:var(--serif);font-size:1.02rem;font-weight:500;margin-bottom:2px}
+.ci-metal{font-size:.74rem;color:var(--fog);margin-bottom:10px}
+.ci-controls{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.qty{display:flex;align-items:center;border:1px solid var(--line)}
+.qty button{width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--ink);transition:background .2s}
+.qty button:hover{background:var(--mist)}
+.qty span{min-width:30px;text-align:center;font-size:.85rem}
+.ci-price{font-family:var(--serif);font-weight:500;font-size:.98rem}
+.ci-remove{font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--fog);transition:color .2s;background:none}
+.ci-remove:hover{color:#b23b3b}
+.cart-foot{padding:24px 28px 28px;border-top:1px solid var(--line);background:var(--paper)}
+.cart-sub{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+.cart-sub .l{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--fog)}
+.cart-sub .v{font-family:var(--serif);font-size:1.5rem;font-weight:500}
+.cart-ship{font-size:.74rem;color:var(--fog);margin-bottom:20px}
+.checkout-btn{
+  width:100%;background:var(--ink);color:var(--ivory);
+  font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;padding:17px;
+  transition:background .3s;
+}
+.checkout-btn:hover{background:var(--lagoon-deep)}
+.checkout-btn:disabled{opacity:.4;cursor:default}
+
+/* order confirmation panel */
+.confirm{padding:56px 34px;text-align:center;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px}
+.confirm .ok{width:56px;height:56px;color:var(--lagoon)}
+.confirm h3{font-family:var(--serif);font-weight:500;font-size:1.5rem}
+.confirm p{color:var(--fog);font-size:.92rem;max-width:280px}
+.confirm .ordernum{font-family:var(--sans);letter-spacing:.16em;font-size:.82rem;color:var(--ink);border:1px solid var(--line);padding:10px 18px;margin-top:4px}
+
+/* ---------- Toast ---------- */
+.toast{
+  position:fixed;bottom:30px;left:50%;transform:translate(-50%,140%);
+  background:var(--ink);color:var(--ivory);padding:15px 26px;
+  font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;z-index:120;
+  transition:transform .45s cubic-bezier(.4,0,.1,1);display:flex;align-items:center;gap:12px;
+}
+.toast.show{transform:translate(-50%,0)}
+.toast svg{width:16px;color:var(--lagoon)}
+
+/* ---------- Responsive ---------- */
+@media(max-width:1000px){
+  .product-grid{grid-template-columns:repeat(2,1fr)}
+  .foot-grid{grid-template-columns:1fr 1fr;gap:36px}
+}
+@media(max-width:860px){
+  .header-inner{grid-template-columns:auto 1fr auto;padding:16px 22px}
+  .nav-primary{display:none}
+  .menu-toggle{display:flex}
+  .brand{justify-self:start}
+  .wrap{padding:0 22px}
+  .cats{grid-template-columns:1fr}
+  .story{grid-template-columns:1fr}
+  .story-art{min-height:340px;order:-1}
+  .strip-inner{gap:30px 40px}
+  .section{padding:74px 0}
+  .hero{padding:80px 22px 90px}
+}
+@media(max-width:560px){
+  .product-grid{grid-template-columns:1fr 1fr;gap:12px}
+  .pc-body{padding:16px}
+  .pc-add{padding:9px 11px;font-size:.6rem}
+  .foot-grid{grid-template-columns:1fr}
+  .foot-base{flex-direction:column}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .hero .eyebrow,.hero h1,.hero .lede,.hero-cta{opacity:1}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== SVG symbol library ===== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- octagram signet: eight-pointed star with plus -->
+    <symbol id="signet" viewBox="0 0 100 100">
+      <g fill="none" stroke="currentColor" stroke-width="2.4">
+        <path d="M50 4 L61 39 L96 50 L61 61 L50 96 L39 61 L4 50 L39 39 Z"/>
+        <circle cx="50" cy="50" r="15"/>
+      </g>
+      <path d="M50 42 V58 M42 50 H58" stroke="#B08D57" stroke-width="2.6" stroke-linecap="round"/>
+    </symbol>
+
+    <!-- octagon product frame -->
+    <symbol id="octoframe" viewBox="0 0 100 100">
+      <path d="M30 3 H70 L97 30 V70 L70 97 H30 L3 70 V30 Z" fill="none" stroke="currentColor" stroke-width="1"/>
+    </symbol>
+
+    <!-- category arrow -->
+    <symbol id="arr" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+
+    <!-- ===== jewelry line-art ===== -->
+    <symbol id="jw-ring" viewBox="0 0 100 100">
+      <g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
+        <path d="M35 34 L50 20 L65 34 L57 44 H43 Z"/><path d="M43 44 L50 32 L57 44"/>
+        <ellipse cx="50" cy="68" rx="26" ry="20"/><ellipse cx="50" cy="68" rx="20" ry="14.5"/>
+      </g>
+    </symbol>
+    <symbol id="jw-pendant" viewBox="0 0 100 100">
+      <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M14 24 Q50 46 86 24"/><path d="M50 40 v8"/>
+        <path d="M42 56 L50 48 L58 56 L50 78 Z" stroke-linejoin="round"/>
+        <path d="M42 56 H58"/>
+      </g>
+    </symbol>
+    <symbol id="jw-earrings" viewBox="0 0 100 100">
+      <g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
+        <circle cx="34" cy="30" r="7"/><path d="M34 37 L27 55 L34 74 L41 55 Z"/><path d="M27 55 H41"/>
+        <circle cx="66" cy="30" r="7"/><path d="M66 37 L59 55 L66 74 L73 55 Z"/><path d="M59 55 H73"/>
+      </g>
+    </symbol>
+    <symbol id="jw-bracelet" viewBox="0 0 100 100">
+      <g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
+        <ellipse cx="50" cy="50" rx="38" ry="26"/>
+        <path d="M50 24 l6 8 -6 8 -6 -8 z"/><path d="M84 44 l6 6 -6 6 -6 -6 z" transform="translate(-6,0)"/>
+        <path d="M50 76 l6 -8 -6 -8 -6 8 z"/><path d="M22 44 l6 6 -6 6 -6 -6 z" transform="translate(6,0)"/>
+      </g>
+    </symbol>
+    <symbol id="jw-signet" viewBox="0 0 100 100">
+      <g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
+        <ellipse cx="50" cy="66" rx="24" ry="18"/><ellipse cx="50" cy="66" rx="18" ry="12.5"/>
+        <path d="M34 40 H66 L60 26 H40 Z"/>
+        <path d="M50 30 l4 5 -4 5 -4 -5 z"/>
+      </g>
+    </symbol>
+    <symbol id="jw-cuff" viewBox="0 0 100 100">
+      <g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
+        <path d="M22 38 a30 26 0 0 0 0 24"/><path d="M78 38 a30 26 0 0 1 0 24"/>
+        <path d="M30 34 a26 22 0 0 0 0 32" opacity=".55"/><path d="M70 34 a26 22 0 0 1 0 32" opacity=".55"/>
+        <path d="M50 30 l5 6 -5 6 -5 -6 z"/>
+      </g>
+    </symbol>
+    <symbol id="jw-studs" viewBox="0 0 100 100">
+      <g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
+        <path d="M34 34 l10 10 -10 10 -10 -10 z"/><path d="M24 44 h20 M34 34 v20" stroke-width="1.2"/>
+        <path d="M66 56 l9 9 -9 9 -9 -9 z"/><path d="M57 65 h18 M66 56 v18" stroke-width="1.2"/>
+      </g>
+    </symbol>
+    <symbol id="jw-halo" viewBox="0 0 100 100">
+      <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M12 26 Q50 48 88 26"/>
+        <circle cx="50" cy="62" r="13"/><circle cx="50" cy="62" r="7"/>
+        <path d="M50 49 v-9"/>
+        <g stroke-width="1.3"><path d="M50 45 v3M63 62 h3M50 79 v-3M37 62 h-3"/></g>
+      </g>
+    </symbol>
+
+    <!-- ui icons -->
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M20 20l-4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24"><path d="M6 8h12l1 12H5L6 8z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 8V6a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-ship" viewBox="0 0 24 24"><path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="7" cy="18" r="2" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="17" cy="18" r="2" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+    <symbol id="i-gift" viewBox="0 0 24 24"><path d="M4 11h16v9H4zM4 8h16v3H4zM12 8v12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M12 8S9 3 6.5 5 8 8 12 8zM12 8s3-5 5.5-3S16 8 12 8z" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+    <symbol id="i-badge" viewBox="0 0 24 24"><path d="M12 3l2.2 4.5 5 .7-3.6 3.5.8 4.9L12 18.8 7.6 16.6l.8-4.9L4.8 8.2l5-.7z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></symbol>
+  </defs>
+</svg>
+
+<!-- ===== Announcement ===== -->
+<div class="announce"><span>Complimentary shipping &amp; returns · Signature packaging with every order</span></div>
+
+<!-- ===== Header ===== -->
+<header class="site-header">
+  <div class="header-inner">
+    <nav class="nav-primary">
+      <a href="#products">Jewelry</a>
+      <a href="#categories">Collections</a>
+      <a href="#story">The House</a>
+      <a href="#news">Contact</a>
+    </nav>
+    <button class="icon-btn menu-toggle" aria-label="Menu"><svg><use href="#i-menu"/></svg></button>
+    <a href="#top" class="brand" aria-label="Octoplus home">
+      <svg class="signet" aria-hidden="true"><use href="#signet"/></svg>
+      <span class="wordmark">Octoplus</span>
+    </a>
+    <div class="header-actions">
+      <button class="icon-btn" aria-label="Search"><svg><use href="#i-search"/></svg></button>
+      <button class="icon-btn" aria-label="Account"><svg><use href="#i-user"/></svg></button>
+      <button class="icon-btn" id="cartBtn" aria-label="Shopping bag">
+        <svg><use href="#i-bag"/></svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <!-- ===== Hero ===== -->
+  <section class="hero">
+    <svg class="hero-watermark" aria-hidden="true"><use href="#signet"/></svg>
+    <div class="hero-inner">
+      <span class="eyebrow">Fine Jewelry · Est. MMXXV</span>
+      <h1>Brilliance,<br><em>refined.</em></h1>
+      <p class="lede">Rare stones and precious metals, shaped by hand into pieces meant to outlast the moment they mark.</p>
+      <div class="hero-cta">
+        <a href="#products" class="btn btn-solid">Shop the collection</a>
+        <a href="#story" class="btn btn-ghost">Book an appointment</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Assurance strip ===== -->
+  <div class="strip">
+    <div class="strip-inner">
+      <div class="strip-item"><svg><use href="#i-badge"/></svg>Lifetime craftsmanship warranty</div>
+      <div class="strip-item"><svg><use href="#i-ship"/></svg>Insured worldwide delivery</div>
+      <div class="strip-item"><svg><use href="#i-gift"/></svg>Complimentary engraving</div>
+    </div>
+  </div>
+
+  <!-- ===== Categories ===== -->
+  <section class="section" id="categories">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Explore</span>
+        <h2>Collections</h2>
+        <p>Each octagon marks a house signature — eight facets, one point of light.</p>
+      </div>
+      <div class="cats">
+        <a class="cat" href="#products" data-filter="Rings">
+          <div class="cat-art"><svg><use href="#jw-ring"/></svg></div>
+          <h3>Rings</h3>
+          <span class="link">Discover <svg><use href="#arr"/></svg></span>
+        </a>
+        <a class="cat" href="#products" data-filter="Necklaces">
+          <div class="cat-art"><svg><use href="#jw-pendant"/></svg></div>
+          <h3>Necklaces</h3>
+          <span class="link">Discover <svg><use href="#arr"/></svg></span>
+        </a>
+        <a class="cat" href="#products" data-filter="Earrings">
+          <div class="cat-art"><svg><use href="#jw-earrings"/></svg></div>
+          <h3>Earrings</h3>
+          <span class="link">Discover <svg><use href="#arr"/></svg></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Products ===== -->
+  <section class="section products" id="products">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">The Maison</span>
+        <h2>Signature pieces</h2>
+        <p id="filterNote">A curated selection, each numbered and accompanied by its certificate.</p>
+      </div>
+      <div class="product-grid" id="grid"></div>
+    </div>
+  </section>
+
+  <!-- ===== Story ===== -->
+  <section class="story" id="story">
+    <div class="story-art"><svg class="halo" aria-hidden="true"><use href="#signet"/></svg></div>
+    <div class="story-copy">
+      <span class="eyebrow">The House of Octoplus</span>
+      <h2>Eight facets of a single obsession</h2>
+      <p>Founded on the belief that jewelry should be as considered as it is beautiful, Octoplus works only in responsibly sourced stones and solid precious metal.</p>
+      <p>Every piece is set by a single artisan from first sketch to final polish, then sealed with our octagram — a mark of the hand behind it.</p>
+      <a href="#products" class="btn btn-ghost">Meet the collection</a>
+    </div>
+  </section>
+
+  <!-- ===== Newsletter ===== -->
+  <section class="news" id="news">
+    <svg class="signet" aria-hidden="true"><use href="#signet"/></svg>
+    <h2>The inner circle</h2>
+    <p>Private previews, appointment invitations, and first access to new collections.</p>
+    <form class="news-form" id="newsForm">
+      <input type="email" id="newsEmail" placeholder="Your email address" required aria-label="Email address" />
+      <button type="submit">Join</button>
+    </form>
+    <div class="news-note" id="newsNote"></div>
+  </section>
+</main>
+
+<!-- ===== Footer ===== -->
+<footer class="site-footer">
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <div class="brand">
+        <svg class="signet" style="width:24px;height:24px" aria-hidden="true"><use href="#signet"/></svg>
+        <span class="wordmark" style="font-size:1.3rem">Octoplus</span>
+      </div>
+      <p>Handmade fine jewelry in precious metals and rare stones. Designed to be worn for a lifetime and passed on.</p>
+    </div>
+    <div class="foot-col">
+      <h4>Shop</h4>
+      <a href="#products">Rings</a><a href="#products">Necklaces</a><a href="#products">Earrings</a><a href="#products">Bracelets</a>
+    </div>
+    <div class="foot-col">
+      <h4>Service</h4>
+      <a href="#">Book an appointment</a><a href="#">Engraving</a><a href="#">Repairs &amp; care</a><a href="#">Shipping</a>
+    </div>
+    <div class="foot-col">
+      <h4>Maison</h4>
+      <a href="#story">Our story</a><a href="#">Sustainability</a><a href="#">Craftsmanship</a><a href="#news">Contact</a>
+    </div>
+  </div>
+  <div class="foot-base">
+    <span>© <span id="yr"></span> Octoplus. All rights reserved.</span>
+    <span>Privacy · Terms · Accessibility</span>
+  </div>
+</footer>
+
+<!-- ===== Cart drawer ===== -->
+<div class="overlay" id="overlay"></div>
+<aside class="cart" id="cart" aria-label="Shopping bag" aria-hidden="true">
+  <div class="cart-head">
+    <h3>Your Bag</h3>
+    <button class="close" id="cartClose" aria-label="Close bag"><svg><use href="#i-close"/></svg></button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-foot" id="cartFoot" hidden>
+    <div class="cart-sub"><span class="l">Subtotal</span><span class="v" id="cartTotal">$0</span></div>
+    <p class="cart-ship">Shipping &amp; duties calculated at checkout · Complimentary within the US.</p>
+    <button class="checkout-btn" id="checkoutBtn">Proceed to checkout</button>
+  </div>
+</aside>
+
+<!-- ===== Toast ===== -->
+<div class="toast" id="toast"><svg><use href="#i-check"/></svg><span id="toastMsg"></span></div>
+
+<script>
+// ---------- Fallback catalog (used when the API isn't running, e.g. static preview) ----------
+const FALLBACK = [
+  {id:'ring-octavia', name:'Octavia Solitaire', category:'Rings', metal:'Platinum', price:4200, art:'jw-ring'},
+  {id:'neck-meridian', name:'Meridian Pendant', category:'Necklaces', metal:'18k White Gold', price:2650, art:'jw-pendant'},
+  {id:'ear-lumiere', name:'Lumière Drops', category:'Earrings', metal:'Platinum', price:3100, art:'jw-earrings'},
+  {id:'brac-cascade', name:'Cascade Bracelet', category:'Bracelets', metal:'18k White Gold', price:5800, art:'jw-bracelet'},
+  {id:'ring-signet', name:'Octo Signet', category:'Rings', metal:'18k Yellow Gold', price:1950, art:'jw-signet'},
+  {id:'brac-aria', name:'Aria Cuff', category:'Bracelets', metal:'Sterling Silver', price:3400, art:'jw-cuff'},
+  {id:'ear-celeste', name:'Celeste Studs', category:'Earrings', metal:'Platinum', price:1450, art:'jw-studs'},
+  {id:'neck-halo', name:'Halo Necklace', category:'Necklaces', metal:'18k White Gold', price:4750, art:'jw-halo'}
+];
+
+let PRODUCTS = [];
+let cart = [];            // {id, qty}
+let activeFilter = null;
+
+const $ = s => document.querySelector(s);
+const money = n => '$' + n.toLocaleString('en-US');
+const artFor = id => (PRODUCTS.find(p=>p.id===id)||{}).art || 'signet';
+
+// ---------- Load catalog: try API, fall back gracefully ----------
+async function loadCatalog(){
+  try{
+    const ctrl = new AbortController();
+    const t = setTimeout(()=>ctrl.abort(), 1500);
+    const res = await fetch('/api/products', {signal:ctrl.signal});
+    clearTimeout(t);
+    if(!res.ok) throw new Error('bad status');
+    const data = await res.json();
+    PRODUCTS = Array.isArray(data) && data.length ? data : FALLBACK;
+  }catch(e){
+    PRODUCTS = FALLBACK; // static preview mode
+  }
+  renderGrid();
+}
+
+function renderGrid(){
+  const grid = $('#grid');
+  const list = activeFilter ? PRODUCTS.filter(p=>p.category===activeFilter) : PRODUCTS;
+  grid.innerHTML = list.map(p => `
+    <article class="product-card">
+      <div class="pc-media">
+        <svg class="pc-frame" aria-hidden="true"><use href="#octoframe"/></svg>
+        <svg class="jewel" aria-hidden="true"><use href="#${p.art}"/></svg>
+      </div>
+      <div class="pc-body">
+        <span class="pc-cat">${p.category}</span>
+        <span class="pc-name">${p.name}</span>
+        <span class="pc-metal">${p.metal}</span>
+        <div class="pc-foot">
+          <span class="pc-price">${money(p.price)}</span>
+          <button class="pc-add" data-add="${p.id}">Add to bag</button>
+        </div>
+      </div>
+    </article>`).join('');
+}
+
+// ---------- Cart ----------
+function addToCart(id){
+  const line = cart.find(l=>l.id===id);
+  if(line) line.qty++; else cart.push({id, qty:1});
+  const p = PRODUCTS.find(x=>x.id===id);
+  flashAdd(id);
+  toast(`${p.name} added to your bag`);
+  renderCart();
+  bumpCount();
+}
+function setQty(id, delta){
+  const line = cart.find(l=>l.id===id);
+  if(!line) return;
+  line.qty += delta;
+  if(line.qty <= 0) cart = cart.filter(l=>l.id!==id);
+  renderCart(); bumpCount();
+}
+function removeLine(id){ cart = cart.filter(l=>l.id!==id); renderCart(); bumpCount(); }
+function cartTotal(){ return cart.reduce((s,l)=>{ const p=PRODUCTS.find(x=>x.id===l.id); return s + (p?p.price:0)*l.qty; },0); }
+function cartCount(){ return cart.reduce((s,l)=>s+l.qty,0); }
+
+function renderCart(){
+  const box = $('#cartItems'), foot = $('#cartFoot');
+  if(!cart.length){
+    box.innerHTML = `<div class="cart-empty">
+      <svg><use href="#i-bag"/></svg>
+      <p>Your bag is empty.<br>Every great collection starts with one piece.</p>
+      <button class="btn btn-ghost" id="emptyShop" style="padding:13px 26px">Browse jewelry</button>
+    </div>`;
+    foot.hidden = true;
+    const b = $('#emptyShop'); if(b) b.onclick = closeCart;
+    return;
+  }
+  box.innerHTML = cart.map(l=>{
+    const p = PRODUCTS.find(x=>x.id===l.id); if(!p) return '';
+    return `<div class="ci">
+      <div class="ci-media"><svg><use href="#${p.art}"/></svg></div>
+      <div class="ci-info">
+        <div class="ci-name">${p.name}</div>
+        <div class="ci-metal">${p.metal}</div>
+        <div class="ci-controls">
+          <div class="qty">
+            <button data-dec="${p.id}" aria-label="Decrease">−</button>
+            <span>${l.qty}</span>
+            <button data-inc="${p.id}" aria-label="Increase">+</button>
+          </div>
+          <span class="ci-price">${money(p.price*l.qty)}</span>
+        </div>
+        <button class="ci-remove" data-rm="${p.id}" style="margin-top:8px">Remove</button>
+      </div>
+    </div>`;
+  }).join('');
+  foot.hidden = false;
+  $('#cartTotal').textContent = money(cartTotal());
+}
+
+function bumpCount(){
+  const c = cartCount(), el = $('#cartCount');
+  el.textContent = c;
+  el.classList.toggle('show', c>0);
+}
+function flashAdd(id){
+  const btn = document.querySelector(`[data-add="${id}"]`);
+  if(!btn) return;
+  const t = btn.textContent; btn.textContent = 'Added ✓'; btn.disabled = true;
+  setTimeout(()=>{ btn.textContent = t; btn.disabled = false; }, 1200);
+}
+
+// ---------- Drawer ----------
+function openCart(){ $('#cart').classList.add('open'); $('#overlay').classList.add('open'); $('#cart').setAttribute('aria-hidden','false'); }
+function closeCart(){ $('#cart').classList.remove('open'); $('#overlay').classList.remove('open'); $('#cart').setAttribute('aria-hidden','true'); restoreCart(); }
+
+// ---------- Checkout ----------
+async function checkout(){
+  const btn = $('#checkoutBtn'); btn.disabled = true; btn.textContent = 'Processing…';
+  let orderNo;
+  try{
+    const res = await fetch('/api/orders', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ items: cart, total: cartTotal() })
+    });
+    if(!res.ok) throw new Error();
+    const data = await res.json();
+    orderNo = data.orderNumber;
+  }catch(e){
+    orderNo = 'OCT-' + Math.random().toString(36).slice(2,7).toUpperCase(); // preview fallback
+  }
+  showConfirm(orderNo);
+  cart = []; bumpCount();
+}
+function showConfirm(no){
+  $('#cartItems').innerHTML = `<div class="confirm">
+    <svg class="ok"><use href="#i-check"/></svg>
+    <h3>Thank you</h3>
+    <p>Your order is confirmed. A stylist will be in touch to arrange delivery and engraving.</p>
+    <div class="ordernum">Order ${no}</div>
+    <button class="btn btn-ghost" id="keepShopping" style="margin-top:12px;padding:13px 26px">Continue browsing</button>
+  </div>`;
+  $('#cartFoot').hidden = true;
+  $('#keepShopping').onclick = closeCart;
+}
+function restoreCart(){
+  // if a confirmation is showing and cart is empty, reset to empty-state on next open
+  const btn = $('#checkoutBtn'); if(btn){ btn.disabled=false; btn.textContent='Proceed to checkout'; }
+  if(!cart.length){ renderCart(); }
+}
+
+// ---------- Newsletter ----------
+async function subscribe(e){
+  e.preventDefault();
+  const email = $('#newsEmail').value.trim();
+  const note = $('#newsNote');
+  if(!email){ return; }
+  try{
+    await fetch('/api/contact', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ email })
+    });
+  }catch(_){ /* preview mode: silently accept */ }
+  note.textContent = 'Welcome to the inner circle. Check your inbox soon.';
+  $('#newsForm').reset();
+  setTimeout(()=>{ note.textContent=''; }, 5000);
+}
+
+// ---------- Toast ----------
+let toastTimer;
+function toast(msg){
+  const t = $('#toast'); $('#toastMsg').textContent = msg;
+  t.classList.add('show'); clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>t.classList.remove('show'), 2600);
+}
+
+// ---------- Events ----------
+document.addEventListener('click', e=>{
+  const add = e.target.closest('[data-add]'); if(add){ addToCart(add.dataset.add); return; }
+  const inc = e.target.closest('[data-inc]'); if(inc){ setQty(inc.dataset.inc, 1); return; }
+  const dec = e.target.closest('[data-dec]'); if(dec){ setQty(dec.dataset.dec, -1); return; }
+  const rm  = e.target.closest('[data-rm]');  if(rm){ removeLine(rm.dataset.rm); return; }
+  const cat = e.target.closest('[data-filter]');
+  if(cat){ activeFilter = cat.dataset.filter; renderGrid();
+    $('#filterNote').textContent = `Showing ${activeFilter}. `; }
+});
+$('#cartBtn').onclick = openCart;
+$('#cartClose').onclick = closeCart;
+$('#overlay').onclick = closeCart;
+$('#checkoutBtn').onclick = checkout;
+$('#newsForm').onsubmit = subscribe;
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeCart(); });
+$('#yr').textContent = new Date().getFullYear();
+
+// ---------- Init ----------
+loadCatalog();
+renderCart();
+</script>
+</body>
+</html>
