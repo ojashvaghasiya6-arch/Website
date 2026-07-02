@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OCTOPLUS | Fine Jewelry</title>
+    <title>OCTOPLUS | Oceanic Fine Jewelry</title>
     <style>
-        /* Typography & Color Palette */
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap');
+        /* Typography & Oceanic Color Palette */
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Lato:wght@300;400;700&display=swap');
 
         :root {
-            --matte-black: #1a1a1a;
-            --rose-gold: #b76e79;
-            --light-grey: #f8f8f8;
-            --white: #ffffff;
+            --ocean-deep: #041421;      /* Deep abyssal blue */
+            --ocean-mid: #0D2C4A;       /* Mid-water blue */
+            --seafoam: #E1EFEF;         /* Crisp off-white for text */
+            --matte-black: #111111;     /* Sharp contrast */
+            --rose-gold: #B76E79;       /* Warm metallic accent */
         }
 
         * {
@@ -22,23 +23,28 @@
         }
 
         body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--white);
-            color: var(--matte-black);
+            font-family: 'Lato', sans-serif;
+            background-color: var(--ocean-deep);
+            color: var(--seafoam);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         h1, h2, h3, h4 {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Cinzel', serif;
             font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         /* Navigation */
         header {
-            position: sticky;
+            position: fixed;
             top: 0;
-            background: rgba(255, 255, 255, 0.98);
-            border-bottom: 1px solid #eaeaea;
+            width: 100%;
+            background: rgba(4, 20, 33, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(225, 239, 239, 0.1);
             z-index: 1000;
         }
 
@@ -52,25 +58,24 @@
         }
 
         .logo {
-            font-size: 2rem;
-            letter-spacing: 4px;
-            text-transform: uppercase;
+            font-size: 2.2rem;
+            letter-spacing: 6px;
             text-decoration: none;
-            color: var(--matte-black);
+            color: var(--seafoam);
+            font-weight: 600;
         }
 
         .nav-links {
             display: flex;
-            gap: 2.5rem;
+            gap: 3rem;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: var(--matte-black);
+            color: var(--seafoam);
             font-size: 0.85rem;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            transition: color 0.3s;
+            letter-spacing: 2px;
+            transition: color 0.3s ease;
         }
 
         .nav-links a:hover {
@@ -79,106 +84,150 @@
 
         /* Hero Section */
         .hero {
-            height: 85vh;
-            background-image: url('https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=2070&auto=format&fit=crop'); /* Placeholder Hero */
+            height: 100vh;
+            background: linear-gradient(to bottom, rgba(4, 20, 33, 0.3), var(--ocean-deep)), 
+                        url('https://images.unsplash.com/photo-1518837695005-2083093ee35b?q=80&w=2070&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
+            background-attachment: fixed;
             display: flex;
-            align-items: flex-end;
-            padding: 5% 10%;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 5%;
         }
 
         .hero-content {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 3rem;
-            max-width: 500px;
+            max-width: 700px;
+            margin-top: 5rem;
         }
 
         .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: 8px;
+            text-shadow: 0px 4px 15px rgba(0,0,0,0.5);
         }
 
         .hero p {
-            font-size: 1rem;
-            margin-bottom: 2rem;
-            color: #555;
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            color: rgba(225, 239, 239, 0.8);
+            font-weight: 300;
+            letter-spacing: 1px;
         }
 
         .btn {
             display: inline-block;
             padding: 1rem 3rem;
-            background-color: var(--matte-black);
-            color: var(--white);
+            background-color: transparent;
+            color: var(--seafoam);
+            border: 1px solid var(--seafoam);
             text-decoration: none;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 0.8rem;
-            transition: background 0.3s;
+            letter-spacing: 3px;
+            font-size: 0.85rem;
+            transition: all 0.4s ease;
         }
 
         .btn:hover {
             background-color: var(--rose-gold);
+            border-color: var(--rose-gold);
+            color: var(--matte-black);
         }
 
         /* Product Grid */
-        .featured {
-            padding: 6rem 5%;
+        .collection {
+            padding: 8rem 5%;
             max-width: 1400px;
             margin: 0 auto;
         }
 
         .section-title {
             text-align: center;
-            font-size: 2.2rem;
-            margin-bottom: 4rem;
+            font-size: 2rem;
+            margin-bottom: 5rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 1px;
+            background-color: var(--rose-gold);
+            margin: 1.5rem auto 0;
         }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 4rem;
         }
 
         .product-card {
             text-align: center;
             cursor: pointer;
+            group: hover;
+        }
+
+        .image-container {
+            overflow: hidden;
+            margin-bottom: 2rem;
+            background-color: var(--ocean-mid);
+            position: relative;
         }
 
         .product-image {
             width: 100%;
             height: 450px;
             object-fit: cover;
-            margin-bottom: 1.5rem;
-            background-color: var(--light-grey);
-            transition: opacity 0.3s;
+            transition: transform 0.7s ease, opacity 0.4s ease;
+            opacity: 0.9;
         }
 
         .product-card:hover .product-image {
-            opacity: 0.85;
+            transform: scale(1.05);
+            opacity: 1;
         }
 
         .product-title {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        .product-desc {
+            font-size: 0.85rem;
+            color: rgba(225, 239, 239, 0.6);
+            margin-bottom: 1rem;
+            font-family: 'Lato', sans-serif;
         }
 
         .product-price {
-            color: #666;
-            font-size: 0.9rem;
+            color: var(--rose-gold);
+            font-size: 1rem;
+            letter-spacing: 1px;
         }
 
         /* Footer */
         footer {
             background-color: var(--matte-black);
-            color: var(--white);
-            padding: 4rem 5%;
+            color: var(--seafoam);
+            padding: 5rem 5%;
             text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
         }
 
         footer h2 {
-            margin-bottom: 1rem;
-            letter-spacing: 3px;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: 5px;
+        }
+
+        .footer-text {
+            font-size: 0.85rem;
+            color: rgba(225, 239, 239, 0.5);
         }
     </style>
 </head>
@@ -187,44 +236,53 @@
     <header>
         <div class="nav-container">
             <div class="nav-links">
-                <a href="#collections">Collections</a>
-                <a href="#new">New Arrivals</a>
+                <a href="#collections">The Abyss</a>
+                <a href="#new">Tide Collection</a>
             </div>
             <a href="#" class="logo">Octoplus</a>
             <div class="nav-links">
-                <a href="#account">Account</a>
-                <a href="#cart">Cart (0)</a>
+                <a href="#about">Our Craft</a>
+                <a href="#cart">Vault (0)</a>
             </div>
         </div>
     </header>
 
     <section class="hero">
         <div class="hero-content">
-            <h1>Masterful Symmetry</h1>
-            <p>Discover the new collection. Contemporary designs grounded in architectural precision and modern minimalism.</p>
-            <a href="#shop" class="btn">Shop the Collection</a>
+            <h1>Depths of Design</h1>
+            <p>Engineered symmetry meets the raw power of the ocean. Discover our latest series of minimalist, structurally immaculate jewelry.</p>
+            <a href="#collections" class="btn">Explore the Deep</a>
         </div>
     </section>
 
-    <section class="featured" id="collections">
-        <h2 class="section-title">Curated For You</h2>
+    <section class="collection" id="collections">
+        <h2 class="section-title">The Mariana Collection</h2>
         <div class="grid">
             <!-- Product 1 -->
             <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1605100804763-247f67b2548e?q=80&w=2070&auto=format&fit=crop" alt="Matte Black Ring" class="product-image">
-                <h3 class="product-title">The Foundation Ring</h3>
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1605100804763-247f67b2548e?q=80&w=2070&auto=format&fit=crop" alt="The Trench Ring" class="product-image">
+                </div>
+                <h3 class="product-title">The Trench Ring</h3>
+                <p class="product-desc">Matte black hardware with balanced symmetry.</p>
                 <p class="product-price">₹45,000</p>
             </div>
             <!-- Product 2 -->
             <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1599643478524-fb66f70b00b0?q=80&w=1974&auto=format&fit=crop" alt="Rose Gold Piece" class="product-image">
-                <h3 class="product-title">Botanical Brooch</h3>
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1599643478524-fb66f70b00b0?q=80&w=1974&auto=format&fit=crop" alt="Abyssal Flora Brooch" class="product-image">
+                </div>
+                <h3 class="product-title">Abyssal Flora Brooch</h3>
+                <p class="product-desc">White gold botanical structure, masculine undertones.</p>
                 <p class="product-price">₹120,000</p>
             </div>
             <!-- Product 3 -->
             <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1603561596112-0a132b757442?q=80&w=2070&auto=format&fit=crop" alt="Diamond Detail" class="product-image">
-                <h3 class="product-title">Brilliant Cut Band</h3>
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1603561596112-0a132b757442?q=80&w=2070&auto=format&fit=crop" alt="Coral Edge Band" class="product-image">
+                </div>
+                <h3 class="product-title">Coral Edge Band</h3>
+                <p class="product-desc">Rose gold minimalism with a brilliant diamond core.</p>
                 <p class="product-price">₹85,000</p>
             </div>
         </div>
@@ -232,7 +290,7 @@
 
     <footer>
         <h2>OCTOPLUS</h2>
-        <p>© 2026 Octoplus Fine Jewelry. All rights reserved.</p>
+        <p class="footer-text">© 2026 Octoplus Fine Jewelry. Forged for the modern tide.</p>
     </footer>
 
 </body>
