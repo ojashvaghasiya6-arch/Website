@@ -10,7 +10,7 @@
 
         :root {
             --ocean-deep: #041421;      /* Deep abyssal blue */
-            --ocean-mid: #0D2C4A;       /* Mid-water blue */
+            --ocean-mid: #0A1D2F;       /* Mid-water blue for alternate sections */
             --seafoam: #E1EFEF;         /* Crisp off-white for text */
             --matte-black: #111111;     /* Sharp contrast */
             --rose-gold: #B76E79;       /* Warm metallic accent */
@@ -22,11 +22,15 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Lato', sans-serif;
             background-color: var(--ocean-deep);
             color: var(--seafoam);
-            line-height: 1.6;
+            line-height: 1.8;
             overflow-x: hidden;
         }
 
@@ -44,7 +48,7 @@
             width: 100%;
             background: rgba(4, 20, 33, 0.95);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(225, 239, 239, 0.1);
+            border-bottom: 1px solid rgba(225, 239, 239, 0.05);
             z-index: 1000;
         }
 
@@ -52,13 +56,13 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 5%;
+            padding: 1.2rem 5%;
             max-width: 1400px;
             margin: 0 auto;
         }
 
         .logo {
-            font-size: 2.2rem;
+            font-size: 2rem;
             letter-spacing: 6px;
             text-decoration: none;
             color: var(--seafoam);
@@ -67,7 +71,7 @@
 
         .nav-links {
             display: flex;
-            gap: 3rem;
+            gap: 2.5rem;
         }
 
         .nav-links a {
@@ -82,41 +86,7 @@
             color: var(--rose-gold);
         }
 
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            background: linear-gradient(to bottom, rgba(4, 20, 33, 0.3), var(--ocean-deep)), 
-                        url('https://images.unsplash.com/photo-1518837695005-2083093ee35b?q=80&w=2070&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 0 5%;
-        }
-
-        .hero-content {
-            max-width: 700px;
-            margin-top: 5rem;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            letter-spacing: 8px;
-            text-shadow: 0px 4px 15px rgba(0,0,0,0.5);
-        }
-
-        .hero p {
-            font-size: 1.1rem;
-            margin-bottom: 3rem;
-            color: rgba(225, 239, 239, 0.8);
-            font-weight: 300;
-            letter-spacing: 1px;
-        }
-
+        /* Reusable Components */
         .btn {
             display: inline-block;
             padding: 1rem 3rem;
@@ -128,6 +98,7 @@
             letter-spacing: 3px;
             font-size: 0.85rem;
             transition: all 0.4s ease;
+            margin-top: 1.5rem;
         }
 
         .btn:hover {
@@ -136,18 +107,12 @@
             color: var(--matte-black);
         }
 
-        /* Product Grid */
-        .collection {
-            padding: 8rem 5%;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
         .section-title {
             text-align: center;
-            font-size: 2rem;
-            margin-bottom: 5rem;
+            font-size: 2.2rem;
+            margin-bottom: 4rem;
             position: relative;
+            letter-spacing: 4px;
         }
 
         .section-title::after {
@@ -159,31 +124,126 @@
             margin: 1.5rem auto 0;
         }
 
+        .container {
+            padding: 8rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* 1. Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(to bottom, rgba(4, 20, 33, 0.4), var(--ocean-deep)), 
+                        url('https://images.unsplash.com/photo-1518837695005-2083093ee35b?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin-top: 4rem;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: 10px;
+            text-shadow: 0px 4px 15px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: rgba(225, 239, 239, 0.8);
+            font-weight: 300;
+        }
+
+        /* 2. Brand Story */
+        .story {
+            background-color: var(--ocean-mid);
+            text-align: center;
+        }
+
+        .story-text {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            color: rgba(225, 239, 239, 0.85);
+        }
+
+        /* 3. Campaign Spotlight (Split Section) */
+        .spotlight {
+            display: flex;
+            align-items: center;
+            gap: 5rem;
+        }
+
+        .spotlight-media {
+            flex: 1;
+            position: relative;
+        }
+
+        .spotlight-media img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .spotlight-content {
+            flex: 1;
+        }
+
+        .spotlight-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .spotlight-content h2::after {
+            margin: 1.5rem 0 0;
+        }
+
+        .spotlight-content p {
+            color: rgba(225, 239, 239, 0.7);
+            margin-bottom: 1.5rem;
+        }
+
+        /* 4. Product Grid */
+        .collection {
+            background-color: var(--ocean-mid);
+        }
+
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 4rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
         }
 
         .product-card {
             text-align: center;
             cursor: pointer;
-            group: hover;
         }
 
         .image-container {
             overflow: hidden;
-            margin-bottom: 2rem;
-            background-color: var(--ocean-mid);
+            margin-bottom: 1.5rem;
+            background-color: var(--ocean-deep);
             position: relative;
         }
 
         .product-image {
             width: 100%;
-            height: 450px;
+            height: 400px;
             object-fit: cover;
             transition: transform 0.7s ease, opacity 0.4s ease;
-            opacity: 0.9;
+            opacity: 0.85;
         }
 
         .product-card:hover .product-image {
@@ -192,16 +252,8 @@
         }
 
         .product-title {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             margin-bottom: 0.5rem;
-            letter-spacing: 1px;
-        }
-
-        .product-desc {
-            font-size: 0.85rem;
-            color: rgba(225, 239, 239, 0.6);
-            margin-bottom: 1rem;
-            font-family: 'Lato', sans-serif;
         }
 
         .product-price {
@@ -210,87 +262,234 @@
             letter-spacing: 1px;
         }
 
-        /* Footer */
-        footer {
-            background-color: var(--matte-black);
-            color: var(--seafoam);
-            padding: 5rem 5%;
-            text-align: center;
-            border-top: 1px solid rgba(255,255,255,0.05);
+        /* 5. Craftsmanship (Full Width Image + Text Overlay) */
+        .craftsmanship {
+            height: 80vh;
+            background: linear-gradient(to right, rgba(4, 20, 33, 0.9) 0%, rgba(4, 20, 33, 0.4) 100%), 
+                        url('https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
         }
 
-        footer h2 {
-            font-size: 1.5rem;
+        .craft-content {
+            padding: 0 10%;
+            max-width: 800px;
+        }
+
+        .craft-content h2 {
+            font-size: 2.8rem;
             margin-bottom: 1.5rem;
-            letter-spacing: 5px;
         }
 
-        .footer-text {
+        .craft-content p {
+            font-size: 1.1rem;
+            color: rgba(225, 239, 239, 0.85);
+            margin-bottom: 1rem;
+        }
+
+        /* 6. Newsletter */
+        .newsletter {
+            text-align: center;
+            background-color: var(--matte-black);
+        }
+
+        .newsletter h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter p {
+            color: rgba(225, 239, 239, 0.6);
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            display: flex;
+            justify-content: center;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .form-group input {
+            padding: 1rem 1.5rem;
+            flex: 1;
+            background: var(--ocean-deep);
+            border: 1px solid rgba(225, 239, 239, 0.2);
+            color: var(--seafoam);
+            font-family: 'Lato', sans-serif;
+            outline: none;
+        }
+
+        .form-group button {
+            padding: 1rem 2rem;
+            background: var(--rose-gold);
+            color: var(--matte-black);
+            border: none;
+            text-transform: uppercase;
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .form-group button:hover {
+            background: var(--seafoam);
+        }
+
+        /* 7. Footer */
+        footer {
+            background-color: var(--ocean-deep);
+            padding: 4rem 5%;
+            text-align: center;
+            border-top: 1px solid rgba(225, 239, 239, 0.05);
+        }
+
+        footer .logo {
+            display: block;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links a {
+            color: rgba(225, 239, 239, 0.6);
+            text-decoration: none;
             font-size: 0.85rem;
-            color: rgba(225, 239, 239, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--rose-gold);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2.5rem; }
+            .spotlight { flex-direction: column; }
+            .spotlight-content h2 { text-align: center; }
+            .spotlight-content h2::after { margin: 1.5rem auto 0; }
         }
     </style>
 </head>
 <body>
 
+    <!-- NAVIGATION -->
     <header>
         <div class="nav-container">
             <div class="nav-links">
-                <a href="#collections">The Abyss</a>
-                <a href="#new">Tide Collection</a>
+                <a href="#story">The Brand</a>
+                <a href="#campaign">Campaign</a>
             </div>
             <a href="#" class="logo">Octoplus</a>
             <div class="nav-links">
-                <a href="#about">Our Craft</a>
-                <a href="#cart">Vault (0)</a>
+                <a href="#collection">Collections</a>
+                <a href="#craft">Craftsmanship</a>
             </div>
         </div>
     </header>
 
+    <!-- 1. HERO SECTION -->
     <section class="hero">
         <div class="hero-content">
             <h1>Depths of Design</h1>
-            <p>Engineered symmetry meets the raw power of the ocean. Discover our latest series of minimalist, structurally immaculate jewelry.</p>
-            <a href="#collections" class="btn">Explore the Deep</a>
+            <p>Engineered symmetry meets the raw power of the ocean. Discover our latest series of minimalist, structurally immaculate fine jewelry.</p>
+            <a href="#collection" class="btn">Explore the Deep</a>
         </div>
     </section>
 
-    <section class="collection" id="collections">
+    <!-- 2. BRAND STORY -->
+    <section class="story" id="story">
+        <div class="container">
+            <h2 class="section-title">Forged in the Abyss</h2>
+            <div class="story-text">
+                <p>Octoplus was founded on the philosophy that true luxury resides in perfect balance. We strip away the unnecessary, leaving only sharp, masculine undertones and structural brilliance. Inspired by the unfathomable depths of the ocean, our pieces are designed for those who command a quiet, undeniable presence.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. CAMPAIGN SPOTLIGHT (Great for Reel/Video integration) -->
+    <section class="container spotlight" id="campaign">
+        <div class="spotlight-media">
+            <!-- Replace this image with a looping video or your viral Reel thumbnail -->
+            <img src="https://images.unsplash.com/photo-1605100804763-247f67b2548e?q=80&w=2070&auto=format&fit=crop" alt="Matte Black and Rose Gold Ring">
+        </div>
+        <div class="spotlight-content">
+            <h2 class="section-title" style="margin-bottom: 1.5rem;">The Obsidian Horizon</h2>
+            <p>Our signature piece redefines modern contrast. Crafted with flawless matte black materials and framed by warm rose gold, this ring acts as a deep-sea anchor—heavy, grounded, and striking.</p>
+            <p>The centerpiece features a precise, custom-cut pink stone, adding a subtle burst of life against the dark, industrial hardware. It is a study in contemporary restraint.</p>
+            <a href="#collection" class="btn">Shop the Drop</a>
+        </div>
+    </section>
+
+    <!-- 4. PRODUCT GRID -->
+    <section class="collection container" id="collection">
         <h2 class="section-title">The Mariana Collection</h2>
         <div class="grid">
-            <!-- Product 1 -->
-            <div class="product-card">
-                <div class="image-container">
-                    <img src="https://images.unsplash.com/photo-1605100804763-247f67b2548e?q=80&w=2070&auto=format&fit=crop" alt="The Trench Ring" class="product-image">
-                </div>
-                <h3 class="product-title">The Trench Ring</h3>
-                <p class="product-desc">Matte black hardware with balanced symmetry.</p>
-                <p class="product-price">₹45,000</p>
-            </div>
-            <!-- Product 2 -->
             <div class="product-card">
                 <div class="image-container">
                     <img src="https://images.unsplash.com/photo-1599643478524-fb66f70b00b0?q=80&w=1974&auto=format&fit=crop" alt="Abyssal Flora Brooch" class="product-image">
                 </div>
                 <h3 class="product-title">Abyssal Flora Brooch</h3>
-                <p class="product-desc">White gold botanical structure, masculine undertones.</p>
                 <p class="product-price">₹120,000</p>
             </div>
-            <!-- Product 3 -->
             <div class="product-card">
                 <div class="image-container">
-                    <img src="https://images.unsplash.com/photo-1603561596112-0a132b757442?q=80&w=2070&auto=format&fit=crop" alt="Coral Edge Band" class="product-image">
+                    <img src="https://images.unsplash.com/photo-1603561596112-0a132b757442?q=80&w=2070&auto=format&fit=crop" alt="Trench Ring" class="product-image">
+                </div>
+                <h3 class="product-title">The Trench Ring</h3>
+                <p class="product-price">₹45,000</p>
+            </div>
+            <div class="product-card">
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1573408301145-b98c41d13264?q=80&w=2069&auto=format&fit=crop" alt="Coral Edge Band" class="product-image">
                 </div>
                 <h3 class="product-title">Coral Edge Band</h3>
-                <p class="product-desc">Rose gold minimalism with a brilliant diamond core.</p>
                 <p class="product-price">₹85,000</p>
             </div>
         </div>
     </section>
 
+    <!-- 5. CRAFTSMANSHIP -->
+    <section class="craftsmanship" id="craft">
+        <div class="craft-content">
+            <h2>Redefining the Botanical</h2>
+            <p>Floral design in fine jewelry often leans fragile. Octoplus rejects this.</p>
+            <p>Our approach is modern floral minimalism—we engineer our white gold and platinum botanical brooches with a refined, masculine stem and leaf structure. By focusing on balanced symmetry and brilliant-cut diamonds, we bring a razor-sharp, contemporary edge to traditional motifs.</p>
+            <a href="#story" class="btn">Read Our Manifesto</a>
+        </div>
+    </section>
+
+    <!-- 6. NEWSLETTER -->
+    <section class="container newsletter">
+        <h2>Join the Depths</h2>
+        <p>Subscribe for exclusive access to limited drops and behind-the-scenes glimpses into our design process.</p>
+        <div class="form-group">
+            <input type="email" placeholder="Enter your email address">
+            <button>Subscribe</button>
+        </div>
+    </section>
+
+    <!-- 7. FOOTER -->
     <footer>
-        <h2>OCTOPLUS</h2>
-        <p class="footer-text">© 2026 Octoplus Fine Jewelry. Forged for the modern tide.</p>
+        <a href="#" class="logo">OCTOPLUS</a>
+        <div class="footer-links">
+            <a href="#">Shipping</a>
+            <a href="#">Returns</a>
+            <a href="#">Care Guide</a>
+            <a href="#">Contact</a>
+        </div>
+        <p style="color: rgba(225, 239, 239, 0.4); font-size: 0.8rem;">© 2026 Octoplus Fine Jewelry. Forged for the modern tide.</p>
     </footer>
 
 </body>
