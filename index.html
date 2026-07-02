@@ -9,11 +9,11 @@
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Lato:wght@300;400;700&display=swap');
 
         :root {
-            --ocean-deep: #041421;      /* Deep abyssal blue */
-            --ocean-mid: #0A1D2F;       /* Mid-water blue for alternate sections */
-            --seafoam: #E1EFEF;         /* Crisp off-white for text */
-            --matte-black: #111111;     /* Sharp contrast */
-            --rose-gold: #B76E79;       /* Warm metallic accent */
+            --ocean-deep: #041421;      
+            --ocean-mid: #0A1D2F;       
+            --seafoam: #E1EFEF;         
+            --matte-black: #111111;     
+            --rose-gold: #B76E79;       
         }
 
         * {
@@ -32,6 +32,7 @@
             color: var(--seafoam);
             line-height: 1.8;
             overflow-x: hidden;
+            perspective: 1000px; /* Base for 3D */
         }
 
         h1, h2, h3, h4 {
@@ -41,15 +42,23 @@
             letter-spacing: 2px;
         }
 
-        /* Navigation */
+        /* 3D Floating Animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Navigation - Glassmorphism Layer */
         header {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(4, 20, 33, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(4, 20, 33, 0.7);
+            backdrop-filter: blur(15px);
             border-bottom: 1px solid rgba(225, 239, 239, 0.05);
             z-index: 1000;
+            transform: translateZ(100px); /* Pushes nav forward in 3D space */
         }
 
         .nav-container {
@@ -67,6 +76,7 @@
             text-decoration: none;
             color: var(--seafoam);
             font-weight: 600;
+            text-shadow: 0 0 20px rgba(225, 239, 239, 0.2);
         }
 
         .nav-links {
@@ -99,17 +109,21 @@
             font-size: 0.85rem;
             transition: all 0.4s ease;
             margin-top: 1.5rem;
+            position: relative;
+            overflow: hidden;
         }
 
         .btn:hover {
             background-color: var(--rose-gold);
             border-color: var(--rose-gold);
             color: var(--matte-black);
+            box-shadow: 0 10px 20px rgba(183, 110, 121, 0.3);
+            transform: translateY(-2px);
         }
 
         .section-title {
             text-align: center;
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             margin-bottom: 4rem;
             position: relative;
             letter-spacing: 4px;
@@ -130,14 +144,14 @@
             margin: 0 auto;
         }
 
-        /* 1. Hero Section */
+        /* 1. Hero Section - 3D Parallax */
         .hero {
             height: 100vh;
-            background: linear-gradient(to bottom, rgba(4, 20, 33, 0.4), var(--ocean-deep)), 
+            background: linear-gradient(to bottom, rgba(4, 20, 33, 0.5), var(--ocean-deep)), 
                         url('https://images.unsplash.com/photo-1518837695005-2083093ee35b?q=80&w=2070&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed;
+            background-attachment: fixed; /* Parallax effect */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -148,19 +162,20 @@
             max-width: 800px;
             margin-top: 4rem;
             padding: 0 20px;
+            animation: float 6s ease-in-out infinite; /* Floating 3D effect */
         }
 
         .hero h1 {
             font-size: 4rem;
             margin-bottom: 1.5rem;
             letter-spacing: 10px;
-            text-shadow: 0px 4px 15px rgba(0,0,0,0.5);
+            text-shadow: 0px 10px 30px rgba(0,0,0,0.8);
         }
 
         .hero p {
             font-size: 1.2rem;
             margin-bottom: 2rem;
-            color: rgba(225, 239, 239, 0.8);
+            color: rgba(225, 239, 239, 0.9);
             font-weight: 300;
         }
 
@@ -168,32 +183,41 @@
         .story {
             background-color: var(--ocean-mid);
             text-align: center;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 -20px 50px rgba(0,0,0,0.5);
         }
 
         .story-text {
             max-width: 800px;
             margin: 0 auto;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             color: rgba(225, 239, 239, 0.85);
         }
 
-        /* 3. Campaign Spotlight (Split Section) */
+        /* 3. Campaign Spotlight */
         .spotlight {
             display: flex;
             align-items: center;
             gap: 5rem;
+            background-color: var(--ocean-deep);
         }
 
         .spotlight-media {
             flex: 1;
-            position: relative;
+            perspective: 1000px;
         }
 
         .spotlight-media img {
             width: 100%;
             height: auto;
             border-radius: 4px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+            transition: transform 0.5s ease;
+        }
+
+        .spotlight-media img:hover {
+            transform: translateZ(50px) rotateY(5deg);
         }
 
         .spotlight-content {
@@ -215,7 +239,7 @@
             margin-bottom: 1.5rem;
         }
 
-        /* 4. Product Grid */
+        /* 4. Interactive 3D Product Grid */
         .collection {
             background-color: var(--ocean-mid);
         }
@@ -223,19 +247,31 @@
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
+            gap: 4rem;
         }
 
         .product-card {
             text-align: center;
             cursor: pointer;
+            background: rgba(4, 20, 33, 0.4);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            transition: box-shadow 0.3s ease;
+            transform-style: preserve-3d; /* CRITICAL FOR 3D */
+        }
+
+        .product-card:hover {
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
         }
 
         .image-container {
             overflow: hidden;
             margin-bottom: 1.5rem;
-            background-color: var(--ocean-deep);
+            background-color: var(--matte-black);
             position: relative;
+            border-radius: 4px;
+            transform: translateZ(30px); /* Pops image out of card */
         }
 
         .product-image {
@@ -243,40 +279,44 @@
             height: 400px;
             object-fit: cover;
             transition: transform 0.7s ease, opacity 0.4s ease;
-            opacity: 0.85;
+            opacity: 0.9;
         }
 
         .product-card:hover .product-image {
-            transform: scale(1.05);
+            transform: scale(1.08);
             opacity: 1;
         }
 
         .product-title {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             margin-bottom: 0.5rem;
+            transform: translateZ(20px); /* Pops text out */
         }
 
         .product-price {
             color: var(--rose-gold);
             font-size: 1rem;
             letter-spacing: 1px;
+            transform: translateZ(20px);
         }
 
-        /* 5. Craftsmanship (Full Width Image + Text Overlay) */
+        /* 5. Craftsmanship - Parallax Depth */
         .craftsmanship {
             height: 80vh;
-            background: linear-gradient(to right, rgba(4, 20, 33, 0.9) 0%, rgba(4, 20, 33, 0.4) 100%), 
+            background: linear-gradient(to right, rgba(4, 20, 33, 0.95) 0%, rgba(4, 20, 33, 0.3) 100%), 
                         url('https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=2070&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed;
+            background-attachment: fixed; /* Parallax background */
             display: flex;
             align-items: center;
+            box-shadow: inset 0 20px 50px rgba(0,0,0,0.8), inset 0 -20px 50px rgba(0,0,0,0.8);
         }
 
         .craft-content {
             padding: 0 10%;
             max-width: 800px;
+            animation: float 8s ease-in-out infinite reverse;
         }
 
         .craft-content h2 {
@@ -284,72 +324,116 @@
             margin-bottom: 1.5rem;
         }
 
-        .craft-content p {
-            font-size: 1.1rem;
-            color: rgba(225, 239, 239, 0.85);
-            margin-bottom: 1rem;
-        }
-
-        /* 6. Newsletter */
-        .newsletter {
+        /* 6. Instagram Reels - 3D Section */
+        .reels-section {
+            background-color: var(--ocean-deep);
             text-align: center;
+        }
+
+        .reels-subtitle {
+            color: rgba(225, 239, 239, 0.7);
+            margin-bottom: 4rem;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .reels-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            justify-items: center;
+        }
+
+        .reel-card {
+            width: 100%;
+            max-width: 320px;
+            background: var(--ocean-mid);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            transform-style: preserve-3d; /* CRITICAL FOR 3D */
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .reel-video-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 9 / 16;
             background-color: var(--matte-black);
-        }
-
-        .newsletter h2 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .newsletter p {
-            color: rgba(225, 239, 239, 0.6);
-            margin-bottom: 2rem;
-        }
-
-        .form-group {
-            display: flex;
-            justify-content: center;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        .form-group input {
-            padding: 1rem 1.5rem;
-            flex: 1;
-            background: var(--ocean-deep);
-            border: 1px solid rgba(225, 239, 239, 0.2);
-            color: var(--seafoam);
-            font-family: 'Lato', sans-serif;
-            outline: none;
-        }
-
-        .form-group button {
-            padding: 1rem 2rem;
-            background: var(--rose-gold);
-            color: var(--matte-black);
-            border: none;
-            text-transform: uppercase;
-            font-family: 'Cinzel', serif;
-            font-weight: 600;
+            overflow: hidden;
             cursor: pointer;
-            transition: background 0.3s;
+            transform: translateZ(25px); /* Pop out effect */
         }
 
-        .form-group button:hover {
-            background: var(--seafoam);
+        .reel-thumbnail {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .reel-video-container:hover .reel-thumbnail {
+            opacity: 0.5;
+        }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 0 5px 15px rgba(0,0,0,0.8);
+            pointer-events: none;
+            transition: transform 0.3s ease;
+        }
+
+        .reel-video-container:hover .play-button {
+            transform: translate(-50%, -50%) scale(1.2);
+        }
+
+        .reel-info {
+            padding: 1.5rem;
+            text-align: left;
+            transform: translateZ(15px);
+        }
+
+        .reel-info p {
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            color: var(--seafoam);
+        }
+
+        .shop-reel-btn {
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            padding: 0.8rem 0;
+            background-color: transparent;
+            color: var(--rose-gold);
+            border: 1px solid var(--rose-gold);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.75rem;
+            transition: all 0.3s ease;
+        }
+
+        .shop-reel-btn:hover {
+            background-color: var(--rose-gold);
+            color: var(--matte-black);
         }
 
         /* 7. Footer */
         footer {
-            background-color: var(--ocean-deep);
+            background-color: var(--matte-black);
             padding: 4rem 5%;
             text-align: center;
-            border-top: 1px solid rgba(225, 239, 239, 0.05);
-        }
-
-        footer .logo {
-            display: block;
-            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 10;
         }
 
         .footer-links {
@@ -372,7 +456,6 @@
             color: var(--rose-gold);
         }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .hero h1 { font-size: 2.5rem; }
@@ -394,7 +477,7 @@
             <a href="#" class="logo">Octoplus</a>
             <div class="nav-links">
                 <a href="#collection">Collections</a>
-                <a href="#craft">Craftsmanship</a>
+                <a href="#social">Social</a>
             </div>
         </div>
     </header>
@@ -418,10 +501,9 @@
         </div>
     </section>
 
-    <!-- 3. CAMPAIGN SPOTLIGHT (Great for Reel/Video integration) -->
+    <!-- 3. CAMPAIGN SPOTLIGHT -->
     <section class="container spotlight" id="campaign">
         <div class="spotlight-media">
-            <!-- Replace this image with a looping video or your viral Reel thumbnail -->
             <img src="https://images.unsplash.com/photo-1605100804763-247f67b2548e?q=80&w=2070&auto=format&fit=crop" alt="Matte Black and Rose Gold Ring">
         </div>
         <div class="spotlight-content">
@@ -432,25 +514,25 @@
         </div>
     </section>
 
-    <!-- 4. PRODUCT GRID -->
+    <!-- 4. 3D PRODUCT GRID -->
     <section class="collection container" id="collection">
         <h2 class="section-title">The Mariana Collection</h2>
         <div class="grid">
-            <div class="product-card">
+            <div class="product-card 3d-card">
                 <div class="image-container">
                     <img src="https://images.unsplash.com/photo-1599643478524-fb66f70b00b0?q=80&w=1974&auto=format&fit=crop" alt="Abyssal Flora Brooch" class="product-image">
                 </div>
                 <h3 class="product-title">Abyssal Flora Brooch</h3>
                 <p class="product-price">₹120,000</p>
             </div>
-            <div class="product-card">
+            <div class="product-card 3d-card">
                 <div class="image-container">
                     <img src="https://images.unsplash.com/photo-1603561596112-0a132b757442?q=80&w=2070&auto=format&fit=crop" alt="Trench Ring" class="product-image">
                 </div>
                 <h3 class="product-title">The Trench Ring</h3>
                 <p class="product-price">₹45,000</p>
             </div>
-            <div class="product-card">
+            <div class="product-card 3d-card">
                 <div class="image-container">
                     <img src="https://images.unsplash.com/photo-1573408301145-b98c41d13264?q=80&w=2069&auto=format&fit=crop" alt="Coral Edge Band" class="product-image">
                 </div>
@@ -470,19 +552,50 @@
         </div>
     </section>
 
-    <!-- 6. NEWSLETTER -->
-    <section class="container newsletter">
-        <h2>Join the Depths</h2>
-        <p>Subscribe for exclusive access to limited drops and behind-the-scenes glimpses into our design process.</p>
-        <div class="form-group">
-            <input type="email" placeholder="Enter your email address">
-            <button>Subscribe</button>
+    <!-- 6. 3D REELS SECTION -->
+    <section class="reels-section container" id="social">
+        <h2 class="section-title">The Tide on Social</h2>
+        <p class="reels-subtitle">Dive into our viral campaigns and styling guides. See how the Mariana Collection moves.</p>
+        
+        <div class="reels-grid">
+            <div class="reel-card 3d-card">
+                <div class="reel-video-container">
+                    <img src="https://images.unsplash.com/photo-1599643478524-fb66f70b00b0?q=80&w=800&auto=format&fit=crop" alt="Reel 1 Thumbnail" class="reel-thumbnail">
+                    <div class="play-button">▶</div>
+                </div>
+                <div class="reel-info">
+                    <p>Styling the Abyssal Flora Brooch 🌊</p>
+                    <a href="#collection" class="shop-reel-btn">Shop This Look</a>
+                </div>
+            </div>
+
+            <div class="reel-card 3d-card">
+                <div class="reel-video-container">
+                    <img src="https://images.unsplash.com/photo-1605100804763-247f67b2548e?q=80&w=800&auto=format&fit=crop" alt="Reel 2 Thumbnail" class="reel-thumbnail">
+                    <div class="play-button">▶</div>
+                </div>
+                <div class="reel-info">
+                    <p>The Obsidian Horizon up close 🖤✨</p>
+                    <a href="#collection" class="shop-reel-btn">Shop This Look</a>
+                </div>
+            </div>
+
+            <div class="reel-card 3d-card">
+                <div class="reel-video-container">
+                    <img src="https://images.unsplash.com/photo-1573408301145-b98c41d13264?q=80&w=800&auto=format&fit=crop" alt="Reel 3 Thumbnail" class="reel-thumbnail">
+                    <div class="play-button">▶</div>
+                </div>
+                <div class="reel-info">
+                    <p>Forging the Coral Edge Band 🛠️</p>
+                    <a href="#collection" class="shop-reel-btn">Shop This Look</a>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- 7. FOOTER -->
     <footer>
-        <a href="#" class="logo">OCTOPLUS</a>
+        <a href="#" class="logo" style="display: block; margin-bottom: 2rem; font-size: 1.5rem;">OCTOPLUS</a>
         <div class="footer-links">
             <a href="#">Shipping</a>
             <a href="#">Returns</a>
@@ -492,5 +605,36 @@
         <p style="color: rgba(225, 239, 239, 0.4); font-size: 0.8rem;">© 2026 Octoplus Fine Jewelry. Forged for the modern tide.</p>
     </footer>
 
+    <!-- 3D INTERACTIVITY ENGINE (JavaScript) -->
+    <script>
+        // Select all elements with the '3d-card' class
+        const cards = document.querySelectorAll('.3d-card');
+
+        cards.forEach(card => {
+            card.addEventListener('mousemove', e => {
+                // Get dimensions and position of the card
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left; // X position inside card
+                const y = e.clientY - rect.top;  // Y position inside card
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                // Calculate rotation based on mouse position (Max rotation: 15 degrees)
+                const rotateX = ((y - centerY) / centerY) * -15; 
+                const rotateY = ((x - centerX) / centerX) * 15;
+                
+                // Apply 3D transform
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+                card.style.transition = 'transform 0.1s ease-out'; // Fast response while moving
+            });
+
+            // Reset when mouse leaves
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+                card.style.transition = 'transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)'; // Smooth snap back
+            });
+        });
+    </script>
 </body>
 </html>
